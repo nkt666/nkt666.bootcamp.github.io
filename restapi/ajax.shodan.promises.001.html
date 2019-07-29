@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Shodan Scan</title>
+    <link rel="stylesheet" href="styles.001.css">
+    <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+-->
+</head>
+
+<body>
+    <div id="labeltarget">
+        <table>
+            <tr>
+                <td>
+                    <b>target > </b><input type="text" id="inputtarget">
+                    <button class="btn btn-success" onclick="hackTarget()">scan</button>
+                </td>
+                <td>
+                    <p id="ipsource"> [ip source >]</p>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h1 id="target"></h1>
+        <p id="data"></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        function getData(url) {
+            return new Promise(function(resolve, reject) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        if (this.status == 200) {
+                            resolve(JSON.parse(this.responseText));
+                        } else {
+                            reject("Error > " + this.status);
+                        }
+                    }
+                };
+                xhttp.open('GET', url);
+                xhttp.send();
+            });
+        }
+
+        function getNetworkData(url) {
+            return new Promise(function(resolve, reject) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        if (this.status == 200) {
+                            resolve(JSON.parse(this.responseText));
+                        } else {
+                            reject("Error > " + this.status);
+                        }
+                    }
+                };
+                xhttp.open('GET', url);
+                xhttp.send();
+            });
+        }
+
+
+
+        async function getAllData(urlshodan, funct) {
+            var arrUrl = urlshodan;
+            var mode = funct;
+            var promesas = arrUrl.map(function(url) {
+                return getData(url);
+            });
+            try {
+                var target = await Promise.all(promesas);
+                if (mode == "ipsource") {
+                    document.getElementById('ipsource').innerHTML = "[ip source > ]<br> [" + target + "]";
+                } else if (mode == "scan") {
+                    document.getElementById("target").innerHTML = "[objetivo > " + document.getElementById('inputtarget').value + "]";
+                    document.getElementById("data").innerHTML = "<p><b>numero de hallazgos ></b> " + target[0].total + "<p><hr>";
+                    for (x = 0; x < target.length; x++) {
+                        for (i = 0; i < target[x].matches.length; i++) {
+                            var httpprot = "http";
+                            var ip = target[x].matches[i].ip_str;
+                            var arrUrlNet = ["https://api.shodan.io/shodan/host/" + ip + "?key=xFe9XnMy0DNgFc537EAemCkBwYdvijtF"];
+                            var promesa2 = arrUrlNet.map(function(url) {
+                                return getData(url);
+                            });
+
+                            //var promesa2 = getData("https://api.shodan.io/shodan/host/" + ip + "?key=xFe9XnMy0DNgFc537EAemCkBwYdvijtF");
+                            var targetnetwork = await Promise.all(promesa2);
+                            //var puertosred = JSON.parse(targetnetwork.responseText);
+                            var puertos = "";
+                            for (z = 0; z < targetnetwork[0].ports.length; z++) {
+                                if (targetnetwork[0].ports[z] == 443) {
+                                    httpprot = "https";
+                                }
+                                puertos += targetnetwork[0].ports[z] + ", ";
+                            }
+                            //console.log(puertosred);
+                            puertos = puertos.substring(0, puertos.length - 2);
+
+                            var vulns = "";
+                            var cv = "https://cve.mitre.org/cgi-bin/cvename.cgi?name=";
+                            if (targetnetwork[0].vulns != null) {
+                                for (a = 0; a < targetnetwork[0].vulns.length; a++) {
+                                    //<a href = \"" + httpprot + "://" + ip + "\" target=\"blank\">[" + (i + 1) + "] " + target[x].matches[i].ip_str + "</a>
+                                    vulns += "<a href = \"https://cve.mitre.org/cgi-bin/cvename.cgi?name=" + targetnetwork[0].vulns[a] + "\" target=\"blank\">" + targetnetwork[0].vulns[a] + "</a>, ";
+                                }
+                                vulns = vulns.substring(0, vulns.length - 2);
+                            }
+                            document.getElementById("data").innerHTML += "<p style = \"background-color: #222;\"> <b>target >  <a href = \"" + httpprot + "://" + ip + "\" target=\"blank\">[" + (i + 1) + "] " + target[x].matches[i].ip_str + "</a></b> </p> " +
+                                "<p> <b>localizacion > </b>" + target[x].matches[i].location.city + " / longitud > " + target[x].matches[i].location.longitude + " / latitud > " + target[x].matches[i].location.latitude + "</p>" +
+                                "<p> <b>isp > </b>" + target[x].matches[i].isp + "</p>" +
+                                "<p> <b>banner > </b>" + target[x].matches[i].data + "</p>" +
+                                "<p> <b>puertos de red > </b> [" + puertos + "]</p>" +
+                                "<p> <b>vulnerabilidades > </b> [" + vulns + "]</p><hr>";
+                            //https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9977
+                        }
+                    }
+                }
+            } catch (error) {
+
+            }
+        }
+
+        function hackTarget() {
+            getIPSource();
+            var target = document.getElementById('inputtarget').value;
+            getAllData(["https://api.shodan.io/shodan/host/search?key=xFe9XnMy0DNgFc537EAemCkBwYdvijtF&query=" + target], "scan");
+        }
+
+        function getIPSource() {
+            getAllData(["https://api.shodan.io/tools/myip?key=xFe9XnMy0DNgFc537EAemCkBwYdvijtF"], "ipsource");
+        }
+    </script>
+</body>
+
+</html>
