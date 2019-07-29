@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reto 03</title>
+    <LINK REL=StyleSheet HREF="reto.003.css">
+
+</head>
+
+<body>
+
+    <hr>
+    <h3>problema 1. aumento salario ></h3>
+    <p>el valor del salario</p>
+    valor salario <input id="valor1" type="text" value="0">
+    <br>
+    <p id="aumento">0.0</p>
+    <button id="operacion" onclick="salario()">Calcular</button>
+
+    <hr>
+    <h3>problema 2. numero pi ></h3>
+    <p>Introduzca el numero de terminos</p>
+    numero de terminos de calculo <input id="n1" type="text" value="0">
+
+    <br>
+    <p id="numeropi">0.0</p>
+    <button onclick="calculopi()">Calcular</button>
+
+    <hr>
+    <h3>problema 3. media ></h3>
+    <p>Introduzca el numero de numeros :P </p>
+    N <input id="N" type="text" value="0" onkeypress="numerosmedia(event)">
+    <p id="cajones"></p>
+    <br>
+    <p id="media">0.0</p>
+    <button onclick="media()">Calcular</button>
+
+
+    <hr>
+    <h3>problema 4. hipotenusa ></h3>
+
+    <p>Introduzca los valores de los Lados</p>
+    lado A <input id="l1" type="text" value="0"> lado B
+    <input id="l2" type="text" value="0">
+
+    <br>
+    <p id="hipotenusa">0.0</p>
+    <button id="resultadhipotenusa" onclick="hipotenusa()">Calcular</button>
+
+
+    <hr>
+    <h3>problema 5. area triangulo ></h3>
+    <p>Introduzca los valores de los lados del triangulo</p>
+    lado A <input id="l51" type="text" value="0"> lado B
+    <input id="l52" type="text" value="0"> lado C
+    <input id="l53" type="text" value="0">
+
+    <br>
+    <p id="area">0.0</p>
+    <button id="resultadoarea" onclick="areatriangulo()">Calcular</button>
+
+    <hr>
+    <h3>problema 6. formato hora ></h3>
+    <p>Introduzca la hora</p>
+    hora <input id="hora" type="text" value="0" maxlength="5">
+
+    <br>
+    <p id="formatohora">0.0</p>
+    <button id="resultadohora" onclick="formatohora()">Calcular</button>
+
+    <hr>
+    <h3>problema 7. formato fecha ></h3>
+    <p>Introduzca la fecha</p>
+    fecha <input id="fecha" type="text" value="0" style="">
+
+    <br>
+    <p id="formatofecha">0.0</p>
+    <button id="resultadofecha" onclick="formatofecha()">Calcular</button>
+
+    <hr>
+    <h3>problema 8. numero palabra ></h3>
+    <p>introduzca el numero entre 100-999 con palabras</p>
+    numero <input id="numero" type="text" value="0" style="">
+
+    <br>
+    <p id="resnumero">0.0</p>
+    <button id="resultadonumero" onclick="numeropalabra()">Calcular</button>
+
+
+
+    <hr>
+    <h3>problema 9. circunferencia ></h3>
+    <p>introduzca el valor del radio</p>
+    valor radio <input id="radio" type="text" value="0" style="">
+
+    <br>
+    <p id="rescircunferencia">0.0</p>
+    <button id="resultadocircunferencia" onclick="circunferencia()">Calcular</button>
+
+
+    <hr>
+    <h3>problema 13. ecuaciones lineales ></h3>
+    <p>Introduczca los coeficientes</p>
+    a <input id="ca" type="text" value="0"> b
+    <input id="cb" type="text" value="0"> c
+    <input id="cc" type="text" value="0"> d
+    <input id="cd" type="text" value="0"> e
+    <input id="ce" type="text" value="0"> f
+    <input id="cf" type="text" value="0">
+
+    <br>
+    <p id="resecuacion">0.0</p>
+    <button id="ecuacion" onclick="ecuacion()">Calcular</button>
+
+    <hr>
+    <h3>problema 14. año bisiesto ></h3>
+    <p>introduzca un numero de año</p>
+    numero año <input id="bisiesto" type="text" value="0" style="">
+
+    <br>
+    <p id="resbisiesto">0.0</p>
+    <button id="resultadobisiesto" onclick="bisiesto()">Calcular</button>
+
+
+    <hr>
+    <h3>problema 17. numero billetes ></h3>
+    <p>introduzca un (denominaciones: 50.000, 20.000, 10.000, 5.000, 2.000, 1.000)</p>
+    valor <input id="valorpesos" type="text" value="0" style="">
+
+    <br>
+    <p id="resvalorpesos">0.0</p>
+    <button id="resultadovalorpesos" onclick="numerobilletes()">Calcular</button>
+
+
+    <hr>
+    <h3>problema 18. numero real ></h3>
+    <p>introduzca un numero y su signo</p>
+    numero real <input id="numeroreal" type="text" value="0" style="">
+
+    <br>
+    <p id="resnumeroreal">0.0</p>
+    <button id="resultadonumeroreal" onclick="numeroreal()">Calcular</button>
+
+
+    <hr>
+    <script src="./reto.003.js"></script>
+
+</body>
+
+</html>
