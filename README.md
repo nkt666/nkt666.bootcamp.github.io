@@ -13,19 +13,19 @@
 <h2>nkt666 bootcamp creatic cluster challenges</h2>
       <div style="text-align: center; padding: 50px;">
         <a   href="/retoCalculadora/index.html" role="button">
-            Reto 1 Calculadora
+            calc challenge
         </a>
         <a   href="/reto-2-Alejandro-Zuniga/index.html" role="button">
-            Reto 2 Ejercicios
+            javascript 2 challenge
         </a>
         <a  href="/reto3-Alejandro-Zuniga/index.html" role="button">
-            Reto 3 Ejercicios
+            javascript 3 challenge
         </a>
         <a  href="/reto-4-Alejandro-Zuniga/index.html" role="button">
-            Reto 4 API
+            rest api challenge
         </a>
         <a   href="/FacturaWebPack/index.html" role="button">
-            Reto 5 Factura
+            vue facture challenge
         </a>
     </div>
 </body>
