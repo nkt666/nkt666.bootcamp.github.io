@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>reto bootcamp</title>
+<style>
+	form{
+		background-color:black;
+	}
+	input[type="text"]{
+		background-color:black;
+		border:0px;
+		width:250px;
+		height: 40px;
+		font-size: 20px;
+		color: green;
+		text-align: right;
+		pointer-events: none;
+	}
+	input[name="numero01"]{
+		height: 20px;
+		font-size: 16px;
+	}
+	input[name="numero02"]{
+		margin-bottom: 5px;
+		font-size: 26px;
+	}
+	input[type="button"]{
+		font-size: 18px;
+		width:60px;border:0px;
+		height: 60px;
+		color: green;
+		background-color:black;
+		margin-bottom: 5px;
+        }
+	body{
+		background-color:#000000;
+	}
+</style>
+</head>
+<body>
+<center>
+<h1 style = "color: green;">reto bootcamp</h1>
+<form name="formularioCalculadora"><br>
+<script type="text/javascript">
+	var borrar = false;
+	var blocdel = false;
+
+   function escribirNumero(n){
+		var caja2 = document.formularioCalculadora.numero02.value;
+		if (borrar) {
+			document.formularioCalculadora.numero02.value="";
+			borrar = false;
+			document.formularioCalculadora.numero02.value = n;
+		}
+		else if (caja2 == "0" && n != "."){
+			cajao = caja2.replace("0", "")
+			document.formularioCalculadora.numero02.value = cajao + n;
+		}
+		else{
+			document.formularioCalculadora.numero02.value = caja2 + n;
+		}
+	}
+
+	function sumar(){
+		document.formularioCalculadora.numero01.value = document.formularioCalculadora.numero02.value+'+';
+ 		borrar = true;
+	}
+	
+	function restar(){
+		document.formularioCalculadora.numero01.value = document.formularioCalculadora.numero02.value+'-';
+ 		borrar = true;
+	}
+
+	function multiplicar(){
+		document.formularioCalculadora.numero01.value = document.formularioCalculadora.numero02.value+'*';
+ 		borrar = true;
+	}
+
+	function dividir(){
+		document.formularioCalculadora.numero01.value = document.formularioCalculadora.numero02.value+'/';
+ 		borrar = true;
+	}
+	
+	function calcular(){
+		var caja1 = document.formularioCalculadora.numero01.value;
+		var caja2 = document.formularioCalculadora.numero02.value;
+		document.formularioCalculadora.numero02.value = eval(caja1 + caja2);
+		document.formularioCalculadora.numero01.value = "";
+		borrar = true;
+		blocdel = true;
+	}
+
+	function borrarNumero(){
+		blocdel = false;
+		var caja2 = document.formularioCalculadora.numero02.value;
+            if (caja2 == "" || caja2 == "0" || caja2.length == 1 && blocdel!=true){
+            	document.formularioCalculadora.numero02.value = "0";
+            }
+            else if(blocdel!=true){
+             	var res = caja2.substring(0,caja2.length-1);
+             	document.formularioCalculadora.numero02.value = res;
+            }
+	}
+
+	
+</script>
+<input type="text" name="numero01">
+<br>
+<input type="text" name="numero02" value="0">
+
+<br>
+<input type="button" onclick="escribirNumero(this.value)" value="7">
+<input type="button" onclick="escribirNumero(this.value)" value="8">
+<input type="button" onclick="escribirNumero(this.value)" value="9">
+
+<br>
+<input type="button" onclick="escribirNumero(this.value)" value="4">
+<input type="button" onclick="escribirNumero(this.value)" value="5">
+<input type="button" onclick="escribirNumero(this.value)" value="6">
+
+<br>
+<input type="button" onclick="escribirNumero(this.value)" value="1">
+<input type="button" onclick="escribirNumero(this.value)" value="2">
+<input type="button" onclick="escribirNumero(this.value)" value="3">
+
+<br>
+<input type="button" onclick="escribirNumero(this.value)" value="0">
+<input type="button" onClick="escribirNumero('.')" value=".">
+<input type="button" class="clear" onClick="borrarNumero()" value="◄">
+<input type="button" class="clear" onClick="document.formularioCalculadora.numero02.value='0'" value="borrar">
+
+<br>
+<input type="button" class="arit" onClick="sumar()" value="+">
+<input type="button" class="arit" onClick="restar()" value="-">
+<input type="button" class="arit" onClick="multiplicar()" value="×">
+<input type="button" class="arit" onClick="dividir()" value="÷">
+<input type="button" class="igual" onClick="calcular()" value="=">
+<br>
+
+</form>
+</center>
+<div align = "right" style = "color: green;">
+	<h2>------by [nkt]------     </h2>
+</div>
+
+</body>
+</html>
