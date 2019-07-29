@@ -12,19 +12,19 @@
 <body>
 <h2>nkt666 bootcamp creatic cluster challenges</h2>
       <div style="text-align: center; padding: 50px;">
-        <a class="btn btn-primary"  href="/retoCalculadora/index.html" role="button">
+        <a   href="/retoCalculadora/index.html" role="button">
             Reto 1 Calculadora
         </a>
-        <a class="btn btn-primary"  href="/reto-2-Alejandro-Zuniga/index.html" role="button">
+        <a   href="/reto-2-Alejandro-Zuniga/index.html" role="button">
             Reto 2 Ejercicios
         </a>
-        <a class="btn btn-primary"  href="/reto3-Alejandro-Zuniga/index.html" role="button">
+        <a  href="/reto3-Alejandro-Zuniga/index.html" role="button">
             Reto 3 Ejercicios
         </a>
-        <a class="btn btn-primary"  href="/reto-4-Alejandro-Zuniga/index.html" role="button">
+        <a  href="/reto-4-Alejandro-Zuniga/index.html" role="button">
             Reto 4 API
         </a>
-        <a class="btn btn-primary"  href="/FacturaWebPack/index.html" role="button">
+        <a   href="/FacturaWebPack/index.html" role="button">
             Reto 5 Factura
         </a>
     </div>
